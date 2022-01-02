@@ -54,10 +54,13 @@ export enum PoolCategory {
 export interface FarmConfig {
   pid: number
   lpSymbol: string
+  depositFee: number
   lpAddresses: Address
   token: Token
   quoteToken: Token
   multiplier?: string
+  isTokenOnly?: boolean
+  tokenAddress: Address
   isCommunity?: boolean
   dual?: {
     rewardPerBlock: number
