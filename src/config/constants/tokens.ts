@@ -49,6 +49,23 @@ export const OneTronic: { [chainId: number]: Token } = {
   ),
  
 }
+export const e1TRC: { [chainId: number]: Token } = {
+  [ChainId.MAINNET]: new Token(
+    ChainId.MAINNET,
+    '0xa12326a70e11B81e59161B7a2a1C664713c8af9e',
+    18,
+    'e1TRC',
+    '1TronicSwap Token',
+  ),
+  [ChainId.TESTNET]: new Token(
+    ChainId.TESTNET,
+    '0x3c66be2fD8FE565998C78163Adf44a03b5841B45',
+    18,
+    'e1TRC',
+    '1TronicSwap Token',
+  ),
+
+}
 export const WBNB = new Token(ChainId.MAINNET, '0xae13d989dac2f0debff460ac112a837c89baa7cd', 18, 'WBNB', 'Wrapped BNB')
 export const DAI = new Token(ChainId.MAINNET, '0x1AF3F329e8BE154074D8769D1FFa4eE058B1DBc3', 18, 'DAI', 'Dai Stablecoin')
 export const USDT = new Token(ChainId.MAINNET, '0xA11c8D9DC9b66E209Ef60F0C8D969D3CD988782c', 6, 'USDT', 'Tether USD')
@@ -90,6 +107,24 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://pancakeswap.finance/',
+  },
+  OneTronic: {
+    symbol: '1TRC',
+    address: {
+      56: '0x97300a4f628701672096460b5469c41a8d3ecb1a',
+      97: '0xf75eff165ffe652548b9c3259465f10f5479b7b5',
+    },
+    decimals: 18,
+    projectLink: 'https://1tronic.io/',
+  },
+  e1TRC: {
+    symbol: 'e1TRC',
+    address: {
+      56: '0xa12326a70e11B81e59161B7a2a1C664713c8af9e',
+      97: '0x3c66be2fD8FE565998C78163Adf44a03b5841B45',
+    },
+    decimals: 18,
+    projectLink: 'https://swap.1tronic.io/',
   },
   chess: {
     symbol: 'CHESS',

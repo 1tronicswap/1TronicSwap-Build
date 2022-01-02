@@ -88,8 +88,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, displayApr, removed, cakePric
       ? `$${farm.liquidity.toNumber().toLocaleString(undefined, { maximumFractionDigits: 0 })}`
       : ''
 
-  const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
-  const earnLabel = farm.dual ? farm.dual.earnLabel : t('CAKE + Fees')
+  const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('1TronicSwap', '')
+  const earnLabel = farm.dual ? farm.dual.earnLabel : t('e1TRC + Fees')
 
   const liquidityUrlPathParts = getLiquidityUrlPathParts({
     quoteTokenAddress: farm.quoteToken.address,
@@ -97,7 +97,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, displayApr, removed, cakePric
   })
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
   const lpAddress = getAddress(farm.lpAddresses)
-  const isPromotedFarm = farm.token.symbol === 'CAKE'
+  const isPromotedFarm = farm.token.symbol === 'e1TRC'
 
   return (
     <FCard isPromotedFarm={isPromotedFarm}>
@@ -144,7 +144,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, displayApr, removed, cakePric
         <DetailsSection
           removed={removed}
           bscScanAddress={getBscScanLink(lpAddress, 'address')}
-          infoAddress={`https://pancakeswap.info/pool/${lpAddress}`}
+          infoAddress = {`https://bscscan.com/address/${lpAddress}`}
           totalValueFormatted={totalValueFormatted}
           lpLabel={lpLabel}
           addLiquidityUrl={addLiquidityUrl}

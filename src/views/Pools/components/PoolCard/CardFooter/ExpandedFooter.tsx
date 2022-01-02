@@ -147,7 +147,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
         </Flex>
       )}
       <Flex mb="2px" justifyContent="flex-end">
-        <LinkExternal href={`https://pancakeswap.info/token/${getAddress(earningToken.address)}`} bold={false} small>
+  <LinkExternal href={`https://bscscan.com/address/${getAddress(earningToken.address)}`} bold={false} small>
           {t('See Token Info')}
         </LinkExternal>
       </Flex>
@@ -159,7 +159,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account }) => {
       {poolContractAddress && (
         <Flex mb="2px" justifyContent="flex-end">
           <LinkExternal
-            href={`${BASE_BSC_SCAN_URL}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
+            href={`https://bscscan.com/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
             bold={false}
             small
           >

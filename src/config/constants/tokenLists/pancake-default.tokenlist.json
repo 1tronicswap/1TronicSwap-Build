@@ -18,6 +18,14 @@
       "decimals": 18,
       "logoURI": "https://pancakeswap.finance/images/tokens/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c.png"
     },
+        {
+          "name": "1TronicSwap Token",
+          "symbol": "e1TRC",
+          "address": "0xa12326a70e11B81e59161B7a2a1C664713c8af9e",
+          "chainId": 56,
+          "decimals": 18,
+          "logoURI": "https://pbs.twimg.com/profile_images/1436696412138340354/JMgpd95x_400x400.jpg"
+        },
     {
       "name": "BIDR BEP20",
       "symbol": "BIDR",
