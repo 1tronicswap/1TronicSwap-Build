@@ -93,6 +93,7 @@
     "@pancakeswap/eslint-config-pancake": "^1.1.0",
     "@types/big.js": "^4.0.5",
     "@types/jest": "^26.0.23",
+    "@types/lodash": "^4.14.178",
     "@types/react-datepicker": "^3.1.8",
     "@types/react-redux": "^7.1.16",
     "@types/react-transition-group": "^4.4.1",
