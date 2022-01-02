@@ -22,23 +22,23 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.wbnb,
   }, 
   {
-    pid: 251,
-    lpSymbol: '1TRC-BNB LP',
+    pid: 1,
+    lpSymbol: 'e1TRC-BNB LP',
     depositFee: 300,
     lpAddresses: {
-      97: '0x20ece652fd5be5d9ade57017ba444393b99b2f06',
-      56: '0xaEf702b81982af12Ef658002e9ebE059Cd5879bf',
+      97: '0x9C21123D94b93361a29B2C2EFB3d5CD8B17e0A9e',
+      56: '0x642D3Bb3067e493244217C25C1Ee2052f47441ea',
     },
     isTokenOnly: true,
     tokenAddress: {
-      97: '0x20ece652fd5be5d9ade57017ba444393b99b2f06',
-      56: '0xaEf702b81982af12Ef658002e9ebE059Cd5879bf',
+      97: '0x9C21123D94b93361a29B2C2EFB3d5CD8B17e0A9e',
+      56: '0x642D3Bb3067e493244217C25C1Ee2052f47441ea',
     },
-    token: tokens.OneTronic,
+    token: tokens.e1TRC,
     quoteToken: tokens.wbnb,
   }, 
   {
-    pid: 252,
+    pid: 2,
     lpSymbol: 'BUSD-BNB LP',
     depositFee: 300,
     lpAddresses: {

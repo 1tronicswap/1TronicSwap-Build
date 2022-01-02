@@ -10,6 +10,8 @@ import useRefresh from 'hooks/useRefresh'
 import { fetchFarmsPublicDataAsync, fetchFarmUserDataAsync, nonArchivedFarms } from '.'
 import { State, Farm, FarmsState } from '../types'
 
+const ZERO = new BigNumber(0)
+
 export const usePollFarmsData = (includeArchive = false) => {
   const dispatch = useAppDispatch()
   const { slowRefresh } = useRefresh()
@@ -29,7 +31,7 @@ export const usePollFarmsData = (includeArchive = false) => {
 
 /**
  * Fetches the "core" farm data used globally
- * 251 = CAKE-BNB LP
+ * 251 = e1TRC-BNB LP
  * 252 = BUSD-BNB LP
  */
 export const usePollCoreFarmData = () => {
@@ -46,7 +48,7 @@ export const useFarms = (): FarmsState => {
   return farms
 }
 
-export const useFarmFromPid = (pid): Farm => {
+export const useFarmFromPid = (pid: number): Farm => {
   const farm = useSelector((state: State) => state.farms.data.find((f) => f.pid === pid))
   return farm
 }
@@ -56,7 +58,7 @@ export const useFarmFromLpSymbol = (lpSymbol: string): Farm => {
   return farm
 }
 
-export const useFarmUser = (pid) => {
+export const useFarmUser = (pid: number) => {
   const farm = useFarmFromPid(pid)
 
   return {
@@ -94,11 +96,11 @@ export const useLpTokenPrice = (symbol: string) => {
 // /!\ Deprecated , use the BUSD hook in /hooks
 
 export const usePriceBnbBusd = (): BigNumber => {
-  const bnbBusdFarm = useFarmFromPid(252)
+  const bnbBusdFarm = useFarmFromPid(2)
   return new BigNumber(bnbBusdFarm.quoteToken.busdPrice)
 }
 
 export const usePriceCakeBusd = (): BigNumber => {
-  const cakeBnbFarm = useFarmFromPid(251)
+  const cakeBnbFarm = useFarmFromPid(1)
   return new BigNumber(cakeBnbFarm.token.busdPrice)
 }
