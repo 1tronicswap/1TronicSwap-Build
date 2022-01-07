@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Modal, Text, LinkExternal, Flex, Box } from 'components/_uikit'
 import { useTranslation } from 'contexts/Localization'
-import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers'
+import { getRoi } from 'utils/compoundApyHelpers'
 
 interface ApyCalculatorModalProps {
   onDismiss?: () => void
@@ -66,40 +66,8 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
   isFarm = false,
 }) => {
   const { t } = useTranslation()
-  const oneThousandDollarsWorthOfToken = 1000 / tokenPrice
 
-  const tokenEarnedPerThousand1D = tokenEarnedPerThousandDollarsCompounding({
-    numberOfDays: 1,
-    farmApr: apr,
-    tokenPrice,
-    roundingDecimals,
-    compoundFrequency,
-    performanceFee,
-  })
-  const tokenEarnedPerThousand7D = tokenEarnedPerThousandDollarsCompounding({
-    numberOfDays: 7,
-    farmApr: apr,
-    tokenPrice,
-    roundingDecimals,
-    compoundFrequency,
-    performanceFee,
-  })
-  const tokenEarnedPerThousand30D = tokenEarnedPerThousandDollarsCompounding({
-    numberOfDays: 30,
-    farmApr: apr,
-    tokenPrice,
-    roundingDecimals,
-    compoundFrequency,
-    performanceFee,
-  })
-  const tokenEarnedPerThousand365D = tokenEarnedPerThousandDollarsCompounding({
-    numberOfDays: 365,
-    farmApr: apr,
-    tokenPrice,
-    roundingDecimals,
-    compoundFrequency,
-    performanceFee,
-  })
+
 
   return (
     <Modal title={t('ROI')} onDismiss={onDismiss}>

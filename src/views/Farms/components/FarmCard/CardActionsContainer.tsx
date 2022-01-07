@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useMemo, useState, useCallback } from 'react'
 import styled from 'styled-components'
 import BigNumber from 'bignumber.js'
 import { Button, Flex, Text } from 'components/_uikit'
@@ -8,7 +8,7 @@ import { fetchFarmUserDataAsync } from 'state/farms'
 import { Farm } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
 import { useERC20 } from 'hooks/useContract'
-import UnlockButton from 'components/UnlockButton'
+import ConnectWalletButton from 'components/ConnectWalletButton'
 import StakeAction from './StakeAction'
 import HarvestAction from './HarvestAction'
 import useApproveFarm from '../../hooks/useApproveFarm'
@@ -24,12 +24,14 @@ interface FarmCardActionsProps {
   farm: FarmWithStakedValue
   account?: string
   addLiquidityUrl?: string
+  cakePrice?: BigNumber
+  lpLabel?: string
 }
 
-const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidityUrl }) => {
+const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidityUrl, cakePrice, lpLabel }) => {
   const { t } = useTranslation()
   const [requestedApproval, setRequestedApproval] = useState(false)
-  const { pid, lpAddresses } = farm
+  const { pid, lpAddresses, tokenAddress, isTokenOnly, depositFeeBP } = farm
   const {
     allowance: allowanceAsString = 0,
     tokenBalance: tokenBalanceAsString = 0,
@@ -41,12 +43,20 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
   const stakedBalance = new BigNumber(stakedBalanceAsString)
   const earnings = new BigNumber(earningsAsString)
   const lpAddress = getAddress(lpAddresses)
+  const token = getAddress(tokenAddress)
   const isApproved = account && allowance && allowance.isGreaterThan(0)
   const dispatch = useAppDispatch()
 
-  const lpContract = useERC20(lpAddress)
+  const lpContract = useMemo(() => {
+    if (isTokenOnly) {
+      return token;
+    }
+    return lpAddress;
+  }, [lpAddress, token, isTokenOnly])
 
-  const { onApprove } = useApproveFarm(lpContract)
+  const lptContract = useERC20(lpContract)
+
+  const { onApprove } = useApproveFarm(lptContract)
 
   const handleApprove = useCallback(async () => {
     try {
@@ -62,40 +72,45 @@ const CardActions: React.FC<FarmCardActionsProps> = ({ farm, account, addLiquidi
   const renderApprovalOrStakeButton = () => {
     return isApproved ? (
       <StakeAction
-        stakedBalance={stakedBalance}
-        tokenBalance={tokenBalance}
-        tokenName={farm.lpSymbol}
-        pid={pid}
-        addLiquidityUrl={addLiquidityUrl}
+        isTokenOnly= { isTokenOnly }
+        stakedBalance = { stakedBalance }
+    tokenBalance = { tokenBalance }
+    tokenName = { farm.lpSymbol }
+    pid = { pid }
+    depositFeeBP = { depositFeeBP }
+    apr = { farm.apr }
+    lpLabel = { lpLabel }
+    cakePrice = { cakePrice }
+    addLiquidityUrl = { addLiquidityUrl }
       />
     ) : (
-      <Button mt="8px" width="100%" disabled={requestedApproval} onClick={handleApprove}>
-        {t('Approve Contract')}
-      </Button>
+  <Button mt= "8px" width = "100%" disabled = { requestedApproval } onClick = { handleApprove } >
+    { t('Enable Contract') }
+    < /Button>
     )
   }
 
-  return (
-    <Action>
-      <Flex>
-        <Text bold textTransform="uppercase" color="secondary" fontSize="12px" pr="4px">
-          CAKE
-        </Text>
-        <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
-          {t('Earned')}
-        </Text>
-      </Flex>
-      <HarvestAction earnings={earnings} pid={pid} />
-      <Flex>
-        <Text bold textTransform="uppercase" color="secondary" fontSize="12px" pr="4px">
-          {farm.lpSymbol}
-        </Text>
-        <Text bold textTransform="uppercase" color="textSubtle" fontSize="12px">
-          {t('Staked')}
-        </Text>
-      </Flex>
-      {!account ? <UnlockButton mt="8px" width="100%" /> : renderApprovalOrStakeButton()}
-    </Action>
+return (
+  <Action>
+  <Flex>
+  <Text bold textTransform = "uppercase" color = "secondary" fontSize = "12px" pr = "4px" >
+    ZFAI
+    < /Text>
+    < Text bold textTransform = "uppercase" color = "textSubtle" fontSize = "12px" >
+      { t('Earned') }
+      < /Text>
+      < /Flex>
+      < HarvestAction earnings = { earnings } pid = { pid } />
+        <Flex>
+        <Text bold textTransform = "uppercase" color = "secondary" fontSize = "12px" pr = "4px" >
+          { farm.lpSymbol }
+          < /Text>
+          < Text bold textTransform = "uppercase" color = "textSubtle" fontSize = "12px" >
+            { t('Staked') }
+            < /Text>
+            < /Flex>
+{ !account ? <ConnectWalletButton mt="8px" width = "100%" /> : renderApprovalOrStakeButton() }
+</Action>
   )
 }
 
