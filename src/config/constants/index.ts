@@ -1,4 +1,4 @@
-import { ChainId, JSBI, Percent, Token, WETH } from 'utils/@sdk'
+import { ChainId, JSBI, Percent, Token, WETH } from '@1tronicswap/sdk'
 import { BUSD, DAI, USDT, BIDR, CAKE, WBNB, UST, ETH, USDC } from './tokens'
 
 export const ROUTER_ADDRESS = '0x5fcE4b46b58996a4aAc0962dEC2cd9B257352ee1'

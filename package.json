@@ -26,6 +26,8 @@
     ]
   },
   "dependencies": {
+    "@1tronicswap/sdk": "^1.0.1",
+    "@1tronicswap/uikit": "^1.0.1",
     "@binance-chain/bsc-connector": "^1.0.0",
     "@ethersproject/experimental": "^5.0.1",
     "@pancakeswap/sdk": "^2.3.2",

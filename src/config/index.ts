@@ -1,4 +1,4 @@
-import { ChainId } from 'utils/@sdk'
+import { ChainId } from '@1tronicswap/sdk'
 import BigNumber from 'bignumber.js/bignumber'
 import { BIG_TEN } from 'utils/bigNumber'
 
